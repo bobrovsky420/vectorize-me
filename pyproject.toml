@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vectorize-me"
+version = "0.1.1"
+description = "Vectorizer for MyDevTeam - CLI for ingesting documents into a RAG knowledge base via MCP."
+authors = [
+    { name="Alexander Bobrovsky", email="bobrovsky@seznam.cz" },
+]
+license = { text="Apache-2.0" }
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "mcp>=1.0.0",
+    "pyyaml>=6.0.0",
+    "pypdf>=4.0.0",
+    "python-docx>=1.0.0"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/mydevteam-ai/vectorize-me"
+"Bug Tracker" = "https://github.com/mydevteam-ai/vectorize-me/issues"
+
+[project.scripts]
+mcp-ingest = "vectorizer.cli.ingest:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
