@@ -33,6 +33,6 @@ def main():
     _EXT_FORMAT = {'.pdf': 'pdf', '.md': 'md', '.markdown': 'md', '.docx': 'docx'}
     fmt = args.format or _EXT_FORMAT.get(file_path.suffix.lower(), 'text')
     split_by = 'sections' if fmt in ('md', 'docx') else 'words'
-    chunk_size = 0 if args.no_split else (args.chunk_size or settings.chunk_size)
-    overlap = args.overlap or settings.chunk_overlap
+    chunk_size = 0 if args.no_split else (args.chunk_size if args.chunk_size is not None else settings.chunk_size)
+    overlap = args.overlap if args.overlap is not None else settings.chunk_overlap
     asyncio.run(ingest(file_path, source=args.source, title=title, chunk_size=chunk_size, overlap=overlap, split_by=split_by, fmt=fmt))

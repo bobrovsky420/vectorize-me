@@ -10,7 +10,7 @@ async def _store_chunk(session: ClientSession, text: str, metadata: dict):
     args = {'information': text, 'metadata': metadata}
     if settings.collection:
         args['collection_name'] = settings.collection
-    await session.call_tool(settings.mcp_tool.replace('find', 'store'), args)
+    await session.call_tool(settings.mcp_store_tool, args)
 
 
 async def ingest(file_path: Path, source: str, title: str, chunk_size: int, overlap: int, split_by: str, fmt: str):

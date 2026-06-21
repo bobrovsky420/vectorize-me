@@ -8,6 +8,9 @@ class Settings:
     def __init__(self, data: dict):
         self.mcp_url: str = data.get('mcp_url')
         self.mcp_tool: str = data.get('mcp_tool')
+        self.mcp_store_tool: str = data.get('mcp_store_tool') or (
+            self.mcp_tool.replace('find', 'store') if self.mcp_tool else None
+        )
         self.collection: str = data.get('collection')
         self.chunk_size: int = data.get('chunk_size', 512)
         self.chunk_overlap: int = data.get('chunk_overlap', 64)

@@ -17,11 +17,14 @@ def chunk_by_words(text: str, chunk_size: int, overlap: int) -> list[str]:
 
 
 def chunk_by_sections(text: str) -> list[str]:
-    parts = re.split(r'(?=^## )', text, flags=re.MULTILINE)
+    # Start a new section at any Markdown heading (# .. ######) so DOCX
+    # 'Heading 1' (rendered as '# ') splits like 'Heading 2' ('## ').
+    parts = re.split(r'(?=^#{1,6} )', text, flags=re.MULTILINE)
     parts = [p.strip() for p in parts if p.strip()]
     if not parts:
         return []
-    if parts and not parts[0].startswith('## ') and len(parts) > 1:
+    # Merge any preamble (text before the first heading) into the first section.
+    if not parts[0].startswith('#') and len(parts) > 1:
         parts[1] = parts[0] + '\n\n' + parts[1]
         parts = parts[1:]
     return parts

@@ -1,5 +1,6 @@
 mcp_url: http://localhost:8000/mcp
 mcp_tool: qdrant-find
+mcp_store_tool: qdrant-store
 collection: null
 chunk_size: 512
 chunk_overlap: 64
