@@ -28,3 +28,10 @@ mcp-ingest = "vectorizer.cli.ingest:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=vectorizer --cov-report=term-missing --cov-fail-under=90"
+
+[tool.coverage.run]
+source = ["vectorizer"]
